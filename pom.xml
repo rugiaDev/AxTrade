@@ -119,6 +119,16 @@
             <scope>compile</scope>
             <classifier>all</classifier>
         </dependency>
+        <!-- 마인크래프트 26.x 용 NMS 구현.
+             axapi 통합(all) jar 에는 v1_21_R7 까지만 들어 있고 26.x 는 별도 아티팩트로만 배포되므로
+             직접 물려서 셰이드해야 26.2 서버에서 NMSHandler 를 찾을 수 있다. -->
+        <dependency>
+            <groupId>com.artillexstudios.axapi.nms.v26_2</groupId>
+            <artifactId>axapi</artifactId>
+            <version>2.2.0-DEV-ITEMS-21</version>
+            <scope>compile</scope>
+            <classifier>all</classifier>
+        </dependency>
         <dependency>
             <groupId>dev.triumphteam</groupId>
             <artifactId>triumph-gui</artifactId>
