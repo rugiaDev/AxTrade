@@ -264,8 +264,14 @@ public class Trade {
         boolean sync = folia ? Scheduler.get().isOwnedByCurrentRegion(location) : Bukkit.isPrimaryThread();
 
         Location copy = location.clone();
+        // 비동기 경로에서는 실행 시점까지 원본 스택이 변형될 수 있으므로 미리 복제해 둔다.
+        final List<ItemStack> safeItems = new ArrayList<>();
+        for (ItemStack item : items) {
+            if (item == null) continue;
+            safeItems.add(item.clone());
+        }
         Runnable runnable = () -> {
-            for (ItemStack key : items) {
+            for (ItemStack key : safeItems) {
                 HashMap<Integer, ItemStack> remaining = inventory.addItem(key);
                 remaining.forEach((k, v) -> copy.getWorld().dropItem(copy, v));
             }

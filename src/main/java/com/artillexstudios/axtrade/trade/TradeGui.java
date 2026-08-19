@@ -364,7 +364,9 @@ public class TradeGui extends GuiFrame {
         for (int slot : slots) {
             ItemStack item = gui.getInventory().getItem(slot);
             if (!includeAir && (item == null || item.getType().isAir())) continue;
-            items.add(item);
+            // 살아있는 GUI 인벤 레퍼런스를 그대로 넘기면 외부(이벤트 소비자)에서 addItem 등으로
+            // 수량을 깎아버려 실제 거래 아이템이 증발한다. 반드시 복제본을 넘긴다.
+            items.add(item != null ? item.clone() : null);
         }
         return items;
     }
