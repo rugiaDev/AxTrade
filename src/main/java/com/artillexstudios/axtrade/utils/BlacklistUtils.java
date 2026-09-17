@@ -44,7 +44,9 @@ public class BlacklistUtils {
 
             if (CONFIG.getString("blacklisted-items." + s + ".name-contains") != null) {
                 if (it.getItemMeta() == null) continue;
-                if (!it.getItemMeta().getDisplayName().contains(CONFIG.getString("blacklisted-items." + s + ".name-contains"))) continue;
+                String nm = it.getItemMeta().hasDisplayName() ? it.getItemMeta().getDisplayName()
+                        : (it.getItemMeta().hasItemName() ? it.getItemMeta().getItemName() : "");   // custom_name 없으면 item_name (09-17)
+                if (!nm.contains(CONFIG.getString("blacklisted-items." + s + ".name-contains"))) continue;
                 return true;
             }
         }
