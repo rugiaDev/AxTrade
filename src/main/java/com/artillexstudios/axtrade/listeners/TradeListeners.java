@@ -26,7 +26,10 @@ import static com.artillexstudios.axtrade.AxTrade.MESSAGEUTILS;
 
 public class TradeListeners implements Listener {
 
-    @EventHandler
+    // 기린월드: GCore 는 나가기 알림의 LOWEST 에서 인벤을 찍어 DB 에 저장하고, 다음 접속 때 그 저장으로 인벤을 덮는다.
+    // 거래 취소로 돌려받는 아이템이 그 뒤에 인벤에 들어가면 저장에 빠져 사라진다 (창이 닫힌 금액 입력 중에 나갈 때).
+    // 그래서 LOWEST + plugin.yml loadbefore: [GCore] (같은 순위에서는 먼저 등록한 쪽이 먼저 돈다) 로 GCore 보다 앞에 둔다 (09-21)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onQuit(@NotNull PlayerQuitEvent event) {
         handleQuitTrade(event);
         handleQuitRequest(event);

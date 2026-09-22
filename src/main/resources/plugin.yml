@@ -14,6 +14,11 @@ permissions:
   axtrade.toggle.other:
     default: op
 
+# 기린월드: 나가기 처리(거래 취소 → 아이템 되돌리기)가 GCore 의 인벤 저장(나가기 알림 LOWEST)보다 먼저 돌아야 한다.
+# 같은 순위에서는 먼저 켜진 플러그인의 처리기가 먼저 돈다 → GCore 보다 먼저 켠다 (09-21). 재화는 PlaceholderAPI 로 실행 중에 읽으므로 순서 영향 없음
+loadbefore:
+  - GCore
+
 softdepend:
   - AxQuestBoard
   - CoinsEngine
