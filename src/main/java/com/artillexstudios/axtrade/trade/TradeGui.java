@@ -124,9 +124,9 @@ public class TradeGui extends GuiFrame {
                 handleCurrencyClick(currencyStr, event);
             }, Map.of(
                     "%amount%", NumberUtils.formatNumber(player.getCurrency(currencyStr)),
-                    "%tax-amount%", NumberUtils.formatNumber(TaxUtils.getTotalAfterTax(player.getCurrency(currencyStr), currencyHook)),
-                    "%tax-percent%", NumberUtils.formatNumber(TaxUtils.getTaxPercent(currencyHook).doubleValue()),
-                    "%tax-fee%", NumberUtils.formatNumber(TaxUtils.getTotalTax(player.getCurrency(currencyStr), currencyHook))
+                    "%tax-amount%", NumberUtils.formatNumber(TaxUtils.getTotalAfterTax(player.getCurrency(currencyStr), currencyHook, player.getPlayer())),
+                    "%tax-percent%", NumberUtils.formatNumber(TaxUtils.getTaxPercent(currencyHook, player.getPlayer()).doubleValue()),
+                    "%tax-fee%", NumberUtils.formatNumber(TaxUtils.getTotalTax(player.getCurrency(currencyStr), currencyHook, player.getPlayer()))
             ));
         }
 
@@ -140,9 +140,9 @@ public class TradeGui extends GuiFrame {
                 event.setCancelled(true);
             }, Map.of(
                     "%amount%", NumberUtils.formatNumber(player.getOtherPlayer().getCurrency(currencyStr)),
-                    "%tax-amount%", NumberUtils.formatNumber(TaxUtils.getTotalAfterTax(player.getOtherPlayer().getCurrency(currencyStr), currencyHook)),
-                    "%tax-percent%", NumberUtils.formatNumber(TaxUtils.getTaxPercent(currencyHook).doubleValue()),
-                    "%tax-fee%", NumberUtils.formatNumber(TaxUtils.getTotalTax(player.getOtherPlayer().getCurrency(currencyStr), currencyHook))
+                    "%tax-amount%", NumberUtils.formatNumber(TaxUtils.getTotalAfterTax(player.getOtherPlayer().getCurrency(currencyStr), currencyHook, player.getOtherPlayer().getPlayer())),
+                    "%tax-percent%", NumberUtils.formatNumber(TaxUtils.getTaxPercent(currencyHook, player.getOtherPlayer().getPlayer()).doubleValue()),
+                    "%tax-fee%", NumberUtils.formatNumber(TaxUtils.getTotalTax(player.getOtherPlayer().getCurrency(currencyStr), currencyHook, player.getOtherPlayer().getPlayer()))
             ));
         }
 

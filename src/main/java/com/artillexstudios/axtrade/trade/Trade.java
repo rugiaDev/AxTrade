@@ -152,7 +152,8 @@ public class Trade {
 
                     List<String> player1Currencies = new ArrayList<>();
                     for (Map.Entry<CurrencyHook, Double> entry : player1.getCurrencies().entrySet()) {
-                        double amountAfterTax = TaxUtils.getTotalAfterTax(entry.getValue(), entry.getKey());
+                        // 수수료 = 내는 사람(player1)의 등급 기준 (10-27 기린월드)
+                        double amountAfterTax = TaxUtils.getTotalAfterTax(entry.getValue(), entry.getKey(), player1.getPlayer());
 
                         entry.getKey().giveBalance(player2.getPlayer().getUniqueId(), amountAfterTax);
 
@@ -174,7 +175,8 @@ public class Trade {
 
                     List<String> player2Currencies = new ArrayList<>();
                     for (Map.Entry<CurrencyHook, Double> entry : player2.getCurrencies().entrySet()) {
-                        double amountAfterTax = TaxUtils.getTotalAfterTax(entry.getValue(), entry.getKey());
+                        // 수수료 = 내는 사람(player2)의 등급 기준 (10-27 기린월드)
+                        double amountAfterTax = TaxUtils.getTotalAfterTax(entry.getValue(), entry.getKey(), player2.getPlayer());
 
                         entry.getKey().giveBalance(player1.getPlayer().getUniqueId(), amountAfterTax);
 
